@@ -100,7 +100,7 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
 iterm2的安装比较简单, 官网中有详细介绍.
 expect能够让我们在需要交互的时候输入我们制定的内容,更多的expect介绍可以参考这里.安装expect在mac下面使用Homebrew安装expect也非常简单1$brew install expec">
 <meta property="og:image" content="http://oney6gz3o.bkt.clouddn.com/iterm2Profiles.jpg">
-<meta property="og:updated_time" content="2017-03-26T08:45:36.000Z">
+<meta property="og:updated_time" content="2017-03-26T13:24:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iterm2配置记住密码登录">
 <meta name="twitter:description" content="本文主要介绍如何通过配置iterm2, 能够让iterm2记住密码, 在下次登录server的时候比较方便.
@@ -207,7 +207,7 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -217,7 +217,7 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -294,7 +294,7 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-26T15:24:00+08:00">
                 2017-03-26
@@ -338,6 +338,7 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
 <li>expect能够让我们在需要交互的时候输入我们制定的内容,更多的expect介绍可以参考<a href="https://en.wikipedia.org/wiki/Expect" target="_blank" rel="external">这里</a>.<h2 id="安装expect"><a href="#安装expect" class="headerlink" title="安装expect"></a>安装expect</h2>在mac下面使用<a href="https://brew.sh/" target="_blank" rel="external">Homebrew</a>安装expect也非常简单<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$brew install expect</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<a id="more"></a>
 <h1 id="编写expect脚本完成登录"><a href="#编写expect脚本完成登录" class="headerlink" title="编写expect脚本完成登录"></a>编写expect脚本完成登录</h1><p>expect可以让我们在需要交互的时候,输入我们事先定好的内容,借助这个特性,可以在我们配置ssh需要密码输入的时候, 自动输入我们保存的密码.</p>
 <p>保存一下内容为<code>ssh-login.exp</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/expect -f</div><div class="line"># 第一个参数为目标server的ip</div><div class="line">set ip [lindex $argv 0 ]</div><div class="line"># 第二个参数为目标server的用户名</div><div class="line">set username [lindex $argv 1 ]</div><div class="line"># 第三个参数为目标server的密码</div><div class="line">set mypassword [lindex $argv 2 ]</div><div class="line">set timeout 10</div><div class="line"></div><div class="line"># </div><div class="line">spawn ssh $username@$ip</div><div class="line">expect &#123;</div><div class="line"># 如果返回的内容里面有&apos;yes/no&apos;,则输入yes</div><div class="line">&quot;*yes/no&quot; &#123; send &quot;yes\r&quot;; exp_continue&#125;</div><div class="line"># 如果返回的内容里面有assword(我们的server有些返回&apos;password&apos;, 有些返回&apos;Password&apos;)的文本, 则输入密码</div><div class="line">&quot;*assword:&quot; &#123; send &quot;$mypassword\r&quot; &#125;</div><div class="line">&#125;</div><div class="line">send_user &quot;It&apos;s OK\r&quot;</div><div class="line">interact</div></pre></td></tr></table></figure></p>
 <p>然后加上脚本可执行的权限<br><code>chmod +x ssh-login.exp</code><br>保存到合适地方, 记下绝对路径, 例如<code>/usr/local/tools-chao/bin/ssh-login.exp</code></p>
@@ -428,10 +429,10 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -452,7 +453,7 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -465,7 +466,7 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">2</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               </a>
             </div>
           
@@ -531,7 +532,7 @@ expect能够让我们在需要交互的时候输入我们制定的内容,更多�
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
